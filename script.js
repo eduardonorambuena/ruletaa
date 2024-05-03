@@ -5,7 +5,7 @@ const resultadosDiv = document.getElementById('resultado');
 const inputNumeros = document.getElementById('inputNumeros');
 
 // Array de números ganadores definidos manualmente
-const numerosGanadoresDefinidos = [40, 2, 50, ];
+const numerosGanadoresDefinidos = [40, 2, 50, 3];
 
 // Array para los números ingresados desde el formulario
 let numerosIngresadosFormulario = [];
@@ -13,24 +13,12 @@ let numerosIngresadosFormulario = [];
 // Índice para seguir el orden de los números ganadores definidos
 let indiceGanadorActual = 0;
 
-// Variable para indicar si se están mostrando los números definidos en orden
-let mostrandoNumerosDefinidos = true;
-
 // Función para dibujar la ruleta con los números ganadores
 function dibujarRuleta() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    let todosLosNumeros = [];
-    
-    if (mostrandoNumerosDefinidos) {
-        // Mostrar números definidos en orden
-        todosLosNumeros = [...numerosGanadoresDefinidos];
-    } else {
-        // Mostrar números ingresados desde el formulario de manera aleatoria
-        todosLosNumeros = [...numerosGanadoresDefinidos, ...numerosIngresadosFormulario];
-        shuffleArray(todosLosNumeros); // Función para mezclar el array de números
-    }
-
+    // Concatenar los números ganadores definidos manualmente con los números ingresados desde el formulario
+    const todosLosNumeros = [...numerosGanadoresDefinidos, ...numerosIngresadosFormulario];
     const numSectores = todosLosNumeros.length;
     const sectorAngle = (2 * Math.PI) / numSectores; // Ángulo de cada sector
     const radius = canvas.width / 2 - 60; // Radio del círculo interior
@@ -71,23 +59,12 @@ function dibujarRuleta() {
 
 // Función para girar la ruleta y determinar el número ganador
 function girarRuleta() {
-    if (mostrandoNumerosDefinidos) {
-        // Mostrar números definidos en orden
+    const numSectores = numerosGanadoresDefinidos.length;
+
+    if (numSectores > 0) {
         const numeroGanador = numerosGanadoresDefinidos[indiceGanadorActual];
-        indiceGanadorActual = (indiceGanadorActual + 1) % numerosGanadoresDefinidos.length;
-
-        if (indiceGanadorActual === 0) {
-            mostrandoNumerosDefinidos = false; // Cambiar a mostrar los números ingresados desde el formulario
-        }
-
+        indiceGanadorActual = (indiceGanadorActual + 1) % numSectores; // Avanzar al siguiente número ganador
         animateGiro(numeroGanador);
-    } else {
-        // Mostrar números ingresados desde el formulario de manera aleatoria
-        const numSectores = numerosGanadoresDefinidos.length + numerosIngresadosFormulario.length;
-        if (numSectores > 0) {
-            const numeroGanador = getRandomNumeroAleatorio(); // Obtener un número aleatorio de los números ingresados desde el formulario
-            animateGiro(numeroGanador);
-        }
     }
 }
 
@@ -115,27 +92,13 @@ function animateGiro(numeroGanador) {
         } else {
             canvas.style.transform = `rotate(${randomAngle}rad)`;
             setTimeout(() => {
+                mostrarResultado(numeroGanador); // Mostrar el número ganador una vez que la animación ha terminado
                 canvas.style.transform = '';
-                mostrarResultado(numeroGanador);
-            }, 100); // Tiempo de espera para volver a la posición original y mostrar el número ganador
+            }, 100); // Tiempo de espera para volver a la posición original
         }
     }
 
     requestAnimationFrame(step);
-}
-
-// Función para obtener un número aleatorio de los números ingresados desde el formulario
-function getRandomNumeroAleatorio() {
-    const index = Math.floor(Math.random() * numerosIngresadosFormulario.length);
-    return numerosIngresadosFormulario[index];
-}
-
-// Función para mezclar aleatoriamente un array (algoritmo de Fisher-Yates)
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
 }
 
 // Función para agregar un número desde el formulario
