@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruleta</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos adicionales para el cuerpo */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            /* Agregar imagen de fondo */
+            background-image: url('imagenes/fondo.jpg'); /* Reemplaza 'ruta/a/tu/imagen.jpg' con la ruta de tu imagen de fondo */
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="ruleta">
+        <div class="contenedor">
+            <canvas id="ruletaCanvas" width="800" height="800"></canvas> <!-- Elemento canvas para la ruleta -->
+            <div class="ruleta-indicador">
+                <span id="resultado"></span>
+            </div>
+        </div>
+        <button id="botonGirar">Girar</button>
+        <br>
+        <label for="inputNumeros">Agregar número:</label>
+        <input type="number" id="inputNumeros">
+        <button id="botonAgregar">Agregar</button>
+    </div>
+
+    <script src="script.js"></script> <!-- Script JavaScript para la funcionalidad de la ruleta -->
+    <script>
+        // JavaScript adicional para inicializar la ruleta al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            dibujarRuleta(); // Dibuja la ruleta al cargar la página
+            const botonGirar = document.getElementById('botonGirar');
+            botonGirar.addEventListener('click', girarRuleta); // Asocia la función girarRuleta al botón de Girar
+
+            const botonAgregar = document.getElementById('botonAgregar');
+            botonAgregar.addEventListener('click', agregarNumeroDesdeFormulario); // Asocia la función agregarNumeroDesdeFormulario al botón Agregar
+        });
+    </script>
+</body>
+</html>
