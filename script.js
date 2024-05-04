@@ -17,18 +17,19 @@ let indiceGanadorActual = 0;
 function dibujarRuleta() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Concatenar los números ganadores definidos manualmente con los números ingresados desde el formulario
     const todosLosNumeros = [...numerosGanadoresDefinidos, ...numerosIngresadosFormulario];
     const numSectores = todosLosNumeros.length;
-    const sectorAngle = (2 * Math.PI) / numSectores; // Ángulo de cada sector
-    const radius = canvas.width / 2 - 60; // Radio del círculo interior
+    const sectorAngle = (2 * Math.PI) / numSectores;
+    const radius = canvas.width / 2 - 60;
 
-    // Dibujar sectores numerados
+    // Array de colores vibrantes para los sectores de la ruleta
+    const coloresVibrantes = ['#ffac81', '#ffdda1', '#ffba92', '#c3e891', '#9fdfdf', '#a0e7e5'];
+
     for (let i = 0; i < numSectores; i++) {
         const startAngle = i * sectorAngle;
         const endAngle = (i + 1) * sectorAngle;
 
-        const color = i % 2 === 0 ? '#007bff' : '#009688';
+        const color = coloresVibrantes[i % coloresVibrantes.length]; // Asignar color vibrante de la lista
         ctx.beginPath();
         ctx.moveTo(canvas.width / 2, canvas.height / 2);
         ctx.arc(canvas.width / 2, canvas.height / 2, radius, startAngle, endAngle);
@@ -42,12 +43,11 @@ function dibujarRuleta() {
         const y = canvas.height / 2 + Math.sin(textAngle) * (radius - 30);
 
         ctx.font = 'bold 16px Arial';
-        ctx.fillStyle = '#ffffff';
+        ctx.fillStyle = 'black';
         ctx.textAlign = 'center';
         ctx.fillText(numero.toString(), x, y);
     }
 
-    // Dibujar flecha en el centro
     ctx.fillStyle = 'red';
     ctx.beginPath();
     ctx.moveTo(canvas.width / 2 - 20, canvas.height / 2 - 60);
