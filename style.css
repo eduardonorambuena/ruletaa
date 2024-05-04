@@ -32,7 +32,7 @@ body {
     transform: translate(-50%, -50%);
     width: 10px;
     height: 100px;
-    background: #ff4500;
+    background: #000000;
     z-index: 1;
 }
 
@@ -43,7 +43,7 @@ body {
     transform: translate(-50%, -50%);
     width: 160px;
     height: 160px;
-    background: white;
+    background: rgb(255, 244, 244);
     border-radius: 50%;
     display: flex;
     justify-content: center;

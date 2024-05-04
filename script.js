@@ -59,11 +59,22 @@ function dibujarRuleta() {
 
 // Función para girar la ruleta y determinar el número ganador
 function girarRuleta() {
-    const numSectores = numerosGanadoresDefinidos.length;
+    let numeroGanador;
 
-    if (numSectores > 0) {
-        const numeroGanador = numerosGanadoresDefinidos[indiceGanadorActual];
-        indiceGanadorActual = (indiceGanadorActual + 1) % numSectores; // Avanzar al siguiente número ganador
+    // Comprobar si hay números ganadores definidos restantes
+    if (indiceGanadorActual < numerosGanadoresDefinidos.length) {
+        numeroGanador = numerosGanadoresDefinidos[indiceGanadorActual];
+        indiceGanadorActual++;
+    } else {
+        // Obtener un número aleatorio de los números ingresados desde el formulario
+        const numIngresadosLength = numerosIngresadosFormulario.length;
+        if (numIngresadosLength > 0) {
+            const randomIndex = Math.floor(Math.random() * numIngresadosLength);
+            numeroGanador = numerosIngresadosFormulario[randomIndex];
+        }
+    }
+
+    if (numeroGanador !== undefined) {
         animateGiro(numeroGanador);
     }
 }

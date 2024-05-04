@@ -30,9 +30,7 @@
             </div>
         </div>
         <button id="botonGirar">Girar</button>
-        <br>
-        <label for="inputNumeros">Agregar número:</label>
-        <input type="number" id="inputNumeros">
+        <input type="number" id="inputNumeros" placeholder="Ingrese un número">
         <button id="botonAgregar">Agregar</button>
     </div>
 
@@ -44,8 +42,8 @@
             const botonGirar = document.getElementById('botonGirar');
             botonGirar.addEventListener('click', girarRuleta); // Asocia la función girarRuleta al botón de Girar
 
-            const botonAgregar = document.getElementById('botonAgregar');
-            botonAgregar.addEventListener('click', agregarNumeroDesdeFormulario); // Asocia la función agregarNumeroDesdeFormulario al botón Agregar
+            const botonAgregarNumeroFormulario = document.getElementById('botonAgregar');
+            botonAgregarNumeroFormulario.addEventListener('click', agregarNumeroDesdeFormulario); // Asocia la función agregarNumeroDesdeFormulario al botón Agregar
         });
     </script>
 </body>
