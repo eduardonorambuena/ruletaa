@@ -5,7 +5,7 @@ const resultadosDiv = document.getElementById('resultado');
 const inputNumeros = document.getElementById('inputNumeros');
 
 // Array de números ganadores definidos manualmente
-const numerosGanadoresDefinidos = [100, 4, 7 , 90, 58, 2];
+const numerosGanadoresDefinidos = [73, 4, 7 , 26, 58, 2];
 
 // Array para los números ingresados desde el formulario
 let numerosIngresadosFormulario = [];
